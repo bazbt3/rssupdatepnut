@@ -1,0 +1,4 @@
+# Exclude the 3 private pnut.io and Pushover token files:
+pnut_app_token.txt
+pushover_app_token.txt
+pushover_user_token.txt
