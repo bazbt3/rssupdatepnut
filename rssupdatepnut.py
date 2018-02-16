@@ -1,5 +1,11 @@
+# rssupdatepnut
+# v0.1 for Python 3.5
+
 # Import RSS feed parser:
 import feedparser
+
+# Import date parser, parse:
+import dateutil.parser
 
 # Import JSON module:
 import json
@@ -7,50 +13,56 @@ import json
 # Import os, used to check if files exist:
 import os
 
+# Import @33MHz and @thrrgilag's library for interacting with pnut.io:
+import pnutpy
+
 # Get RSS feed from Internet:
 feed_title = 'http://bazbt3.10centuries.org/rss.xml'
 d = feedparser.parse(feed_title)
 
-# Extract 10 feed posts' titles, links & published-on data:
-number = 9
+# Extract the most recent feed post's title, link & published date:
+p_title = d.entries[0].title
+p_link = d.entries[0].link
+p_publish = d.entries[0].published
+
+p_latest = p_publish
+
+# Create a list of title, link & published date:
 p_list = []
-p_details = []
-while number >= 0:	
-	p_title = d.entries[number].title
-	# Keep most recent title for later comparison:
-	if number == 0:
-		p_latest = p_title
-	p_link = d.entries[number].link
-	p_publish = d.entries[number].published
+p_list.append(p_title)
+p_list.append(p_link)
+p_list.append(p_publish)
 
-	# Create a nested list of posts
-	p_details.append(p_title)
-	p_details.append(p_link)
-	p_details.append(p_publish)
-	
-	p_list.append(p_details)
-	
-	number -= 1
-	p_details = []
+# Save the latest post to a file, as JSON:
+with open('rssupdatepnut_new.txt', 'w') as newfile:  
+	json.dump(p_list, newfile)
 
-# Print the list of posts:
-post = 9
-while post >= 0:
-	item = 0
-	while item < 3:
-	 print(p_list[post][item])
-	 item += 1
-	post -= 1
-
-# Save the latest posts list to a file, as JSON:
-#rssupdatepnut_base.txt
-with open('rssupdatepnut_new.txt', 'w') as outfile:  
-	json.dump(p_list, outfile)
-
-# Does an 'rssupdatepnut_base.txt' file already exist? If yes, compare its most recent post with the mew data. If not, create it with the most recent post title:
-# p_latest
+# Does an 'rssupdatepnut_base.txt' file already exist, i.e. has this program run before? If not, create the file with its only contents as the most recent post date:
+if not os.path.exists('rssupdatepnut_base.txt'):
+	with open('rssupdatepnut_base.txt', 'w') as basefile:  
+		json.dump(p_latest, basefile)
 if os.path.exists('rssupdatepnut_base.txt'):
-	print('it exists')
-elif not os.path.exists('rssupdatepnut_base.txt'):
-	with open('rssupdatepnut_base.txt', 'w') as outfile:  
-		json.dump(p_latest, outfile)
+	with open('rssupdatepnut_base.txt', 'r') as basefile:  
+		p_last = json.load(basefile)
+
+# Compare the post dates:
+p_last = dateutil.parser.parse(p_last)
+p_latest = dateutil.parser.parse(p_latest)
+pnut_message = ''
+if p_latest > p_last:
+	pnut_message = 'New blog post:\n' + p_title + '\n' + p_link + '\n' + p_publish
+	print(pnut_message)
+
+# Setup pnut.io authorisation:
+tokenfile = open("pnut_app_token.txt", "r")
+token = tokenfile.read()
+token = token.strip()
+pnutpy.api.add_authorization_token(token)
+
+# REPLACE the following with a public post after testing:
+
+# If a new blog post exists, create a message in pnut.io channel 962, using the text from pnut_message:
+if pnut_message != '':
+	posttext = pnut_message
+	channelid = 962
+	postcontent = pnutpy.api.create_message(channelid, data={'text': posttext})
