@@ -1,6 +1,10 @@
 ## Changelog
 (most recent first)
 
+### v0.2 2018-02-19:
+* Changed from sending public messages to sending public posts. Note: application not tested with a blog post prior to this change.
+* Removed unnecessary print command.
+
 ### v0.1 2018-02-16:
 * Changed from examining 10 posts to just the most recent one. The intention is to run this as a cron job every hour (perhaps 2); it's unlikely I'll create a blog post more frequently.
 * Added the creation of a message in my pnut.io dev channel if a new blog post exists.

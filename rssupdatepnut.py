@@ -1,5 +1,5 @@
 # rssupdatepnut
-# v0.1 for Python 3.5
+# v0.2 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -51,7 +51,6 @@ p_latest = dateutil.parser.parse(p_latest)
 pnut_message = ''
 if p_latest > p_last:
 	pnut_message = 'New blog post:\n' + p_title + '\n' + p_link + '\n' + p_publish
-	print(pnut_message)
 
 # Setup pnut.io authorisation:
 tokenfile = open("pnut_app_token.txt", "r")
@@ -59,10 +58,7 @@ token = tokenfile.read()
 token = token.strip()
 pnutpy.api.add_authorization_token(token)
 
-# REPLACE the following with a public post after testing:
-
-# If a new blog post exists, create a message in pnut.io channel 962, using the text from pnut_message:
+# If a new blog post exists, create a public post using the text from pnut_message:
 if pnut_message != '':
 	posttext = pnut_message
-	channelid = 962
-	postcontent = pnutpy.api.create_message(channelid, data={'text': posttext})
+	postcontent = pnutpy.api.create_post(data={'text': posttext})
