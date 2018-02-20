@@ -1,5 +1,5 @@
 # rssupdatepnut
-# v0.2 for Python 3.5
+# v0.2.1 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -37,7 +37,7 @@ p_list.append(p_publish)
 with open('rssupdatepnut_new.txt', 'w') as newfile:  
 	json.dump(p_list, newfile)
 
-# Does an 'rssupdatepnut_base.txt' file already exist, i.e. has this program run before? If not, create the file with its only contents as the most recent post date:
+# Does an 'rssupdatepnut_base.txt' file already exist, i.e. has this program run before? If no, create the file with its only contents as the most recent post date; if yes, read its contents:
 if not os.path.exists('rssupdatepnut_base.txt'):
 	with open('rssupdatepnut_base.txt', 'w') as basefile:  
 		json.dump(p_latest, basefile)
@@ -45,12 +45,14 @@ if os.path.exists('rssupdatepnut_base.txt'):
 	with open('rssupdatepnut_base.txt', 'r') as basefile:  
 		p_last = json.load(basefile)
 
-# Compare the post dates:
+# Compare the post dates, if new > base, compile message & save latest over base:
 p_last = dateutil.parser.parse(p_last)
 p_latest = dateutil.parser.parse(p_latest)
 pnut_message = ''
 if p_latest > p_last:
 	pnut_message = 'New blog post:\n' + p_title + '\n' + p_link + '\n' + p_publish
+	with open('rssupdatepnut_base.txt', 'w') as basefile:  
+		json.dump(p_latest, basefile)
 
 # Setup pnut.io authorisation:
 tokenfile = open("pnut_app_token.txt", "r")

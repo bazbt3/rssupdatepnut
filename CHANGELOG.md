@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.2.1 2018-02-19:
+* Bugfix: Now saves latest post time over base file contents when there's a new post; previous script repeatedly looked at the same old post - hourly! Thanks @33MHz.
+
 ### v0.2 2018-02-19:
 * Changed from sending public messages to sending public posts. Note: application not tested with a blog post prior to this change.
 * Removed unnecessary print command.
