@@ -1,7 +1,11 @@
 ## Changelog
 (most recent first)
 
-### v0.2.1 2018-02-19:
+### v0.2.2 2018-02-20:
+* Bugfix: After the first run, the base file contents were erased; this no longer happens. Crude fix.
+* v0.2.1 was released on 2018-02-20, not the 19th.
+
+### v0.2.1 2018-02-20:
 * Bugfix: Now saves latest post time over base file contents when there's a new post; previous script repeatedly looked at the same old post - hourly! Thanks @33MHz.
 
 ### v0.2 2018-02-19:
