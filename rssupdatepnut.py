@@ -1,5 +1,5 @@
 # rssupdatepnut
-# v0.2.2 for Python 3.5
+# v0.2.3 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -37,11 +37,15 @@ p_list.append(p_publish)
 with open('rssupdatepnut_new.txt', 'w') as newfile:  
 	json.dump(p_list, newfile)
 
-# Does an 'rssupdatepnut_base.txt' file already exist, i.e. has this program run before? If no, create the file with its only contents as the most recent post date; if yes, read its contents:
+# Does an 'rssupdatepnut_base.txt' file already exist, i.e. has this program run before?
+# If not, create the file with its only contents as the most recent post date;
 if not os.path.exists('rssupdatepnut_base.txt'):
 	basefile_w = open('rssupdatepnut_base.txt', 'w')
 	basefile_w.write(p_publish)
 	basefile_w.close()
+	p_last = p_publish
+
+# If yes, read its contents: 	
 if os.path.exists('rssupdatepnut_base.txt'):
 	basefile_r = open('rssupdatepnut_base.txt', 'r') 
 	p_last = basefile_r.read()
