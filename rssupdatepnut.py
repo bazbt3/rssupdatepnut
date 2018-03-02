@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
+
 # rssupdatepnut
-# v0.2.3 for Python 3.5
+# v0.2.4 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -60,14 +62,14 @@ if p_latest > p_last:
 	basefile_w = open('rssupdatepnut_base.txt', 'w')
 	basefile_w.write(p_publish)
 	basefile_w.close()
-	
-# Setup pnut.io authorisation:
-tokenfile = open("pnut_app_token.txt", "r")
-token = tokenfile.read()
-token = token.strip()
-pnutpy.api.add_authorization_token(token)
 
-# If a new blog post exists, create a public post using the text from pnut_message:
+# If a new blog post exists:
 if pnut_message != '':
-	posttext = pnut_message
-	postcontent = pnutpy.api.create_post(data={'text': posttext})
+	# Setup pnut.io authorisation:
+	tokenfile = open("pnut_app_token.txt", "r")
+	token = tokenfile.read()
+	token = token.strip()
+	pnutpy.api.add_authorization_token(token)
+
+	# Create a public post using the text from pnut_message:
+	postcontent = pnutpy.api.create_post(data={'text': pnut_message})

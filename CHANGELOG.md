@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.2.4 2018-03-02:
+* Tidied code to authorise with pnut.io only if there's a notification to make.
+
 ### v0.2.3 2018-02-21:
 * Bugfix: Application works as-intended after correcting the logic of the test for a file containing the last published date.
 
