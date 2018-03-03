@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.3 2018-03-03:
+* Added post to Twitter, using my TwigPen Twython wrapper.
+
 ### v0.2.4 2018-03-02:
 * Tidied code to authorise with pnut.io only if there's a notification to make.
 

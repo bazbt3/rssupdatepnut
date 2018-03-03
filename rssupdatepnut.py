@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # rssupdatepnut
-# v0.2.4 for Python 3.5
+# v0.3 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -17,6 +17,9 @@ import os
 
 # Import @33MHz and @thrrgilag's library for interacting with pnut.io:
 import pnutpy
+
+# Import my Twython wrapper for interacting with Twitter:
+import TwigPen
 
 # Get RSS feed from Internet:
 feed_title = 'http://bazbt3.10centuries.org/rss.xml'
@@ -73,3 +76,6 @@ if pnut_message != '':
 
 	# Create a public post using the text from pnut_message:
 	postcontent = pnutpy.api.create_post(data={'text': pnut_message})
+	
+	# Tweet the text using my TwigPen Twython wrapper:
+		TwigPen.postsomething(pnut_message)
