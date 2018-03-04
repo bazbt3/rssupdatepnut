@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # rssupdatepnut
-# v0.3 for Python 3.5
+# v0.3.2 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -17,9 +17,6 @@ import os
 
 # Import @33MHz and @thrrgilag's library for interacting with pnut.io:
 import pnutpy
-
-# Import my Twython wrapper for interacting with Twitter:
-import TwigPen
 
 # Get RSS feed from Internet:
 feed_title = 'http://bazbt3.10centuries.org/rss.xml'
@@ -77,5 +74,27 @@ if pnut_message != '':
 	# Create a public post using the text from pnut_message:
 	postcontent = pnutpy.api.create_post(data={'text': pnut_message})
 	
-	# Tweet the text using my TwigPen Twython wrapper:
-	TwigPen.postsomething(pnut_message)
+	# Tweet the text using code rolled in from my TwigPen Twython wrapper:
+	
+	# Import the Twython Twitter module:
+	from twython import Twython
+	# Not sure if random is necessary, it's from the article I read, but not wanting more failures in testing right now:
+	import random
+
+	# Prepare the keys to connect to Twitter:
+	f = open('twitter_tokens.txt', 'r')
+	tokens = f.readlines()
+	TWITTER_APP_KEY = tokens[0].rstrip('\n')
+	TWITTER_APP_KEY_SECRET = tokens[1].rstrip('\n')
+	TWITTER_ACCESS_TOKEN = tokens[2].rstrip('\n')
+	TWITTER_ACCESS_TOKEN_SECRET = tokens[3].rstrip('\n')
+	f.close()
+
+	# Setup the token variables:
+	t = Twython(app_key=TWITTER_APP_KEY,
+		app_secret=TWITTER_APP_KEY_SECRET,
+		oauth_token=TWITTER_ACCESS_TOKEN,
+		oauth_token_secret=TWITTER_ACCESS_TOKEN_SECRET)
+
+	# Tweet the text from pnut_message:
+	t.update_status(status=pnut_message)

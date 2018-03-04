@@ -11,7 +11,7 @@ Application is currently tested in Pythonista iOS and my web host. Whilst it can
  * `pnut_app_token.txt`
 * The PNUTpy libraries: `pip install pnutpy`.
 * The feedparser RSS, er… feed parser: `pip install feedparser`.
-* A means of achieving Twitter auth to post, e.g. my [TwigPen module.](https://github.com/bazbt3/TwigPen)
+* A means of achieving Twitter auth to post, e.g. my [TwigPen module.](https://github.com/bazbt3/TwigPen) (Temporarily removed.)
 
 Note: the code can be run with minor modifications to alert independently of a pnut.io account. Put simply, add stuff to make it happen. Er…
 
