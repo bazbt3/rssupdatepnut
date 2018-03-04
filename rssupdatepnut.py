@@ -78,4 +78,4 @@ if pnut_message != '':
 	postcontent = pnutpy.api.create_post(data={'text': pnut_message})
 	
 	# Tweet the text using my TwigPen Twython wrapper:
-		TwigPen.postsomething(pnut_message)
+	TwigPen.postsomething(pnut_message)

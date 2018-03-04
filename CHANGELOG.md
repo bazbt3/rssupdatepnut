@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.3.1 2018-03-03:
+* Removed unexpected indent in the line calling TwigPen.
+
 ### v0.3 2018-03-03:
 * Added post to Twitter, using my TwigPen Twython wrapper.
 
