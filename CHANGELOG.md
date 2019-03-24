@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.3.3 2019-03-24:
+* Changed RSS feed from 10C's to https://bazbt3.github.io/feed.xml.
+
 ### v0.3.2 2018-03-04:
 * After failure to tweet, rolled the TwigPen code into rssupdatepnut, with minor changes.
 
