@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # rssupdatepnut
-# v0.3.3 for Python 3.5
+# v0.3.4 for Python 3.5
 
 # Import RSS feed parser:
 import feedparser
@@ -19,7 +19,7 @@ import os
 import pnutpy
 
 # Get RSS feed from Internet:
-feed_title = 'https://bazbt3.github.io/feed.xml'
+feed_title = 'http://bazbt3.10centuries.org/rss.xml'
 d = feedparser.parse(feed_title)
 
 # Extract the most recent feed post's title, link & published date:

@@ -1,6 +1,9 @@
 ## Changelog
 (most recent first)
 
+### v0.3.4 2019-03-24:
+* Reverted to previous RSS feed.
+
 ### v0.3.3 2019-03-24:
 * Changed RSS feed from 10C's to https://bazbt3.github.io/feed.xml.
 
